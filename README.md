@@ -89,12 +89,12 @@ Examples
 - **Definition**: The function assigning a probability value to each of the numerical values. The pdf of a continuous random variable, p(x), (if it exists) gives us the density of probability in x
 
 - **Properties**: 
-  - \( p(x) \geq 0 \) for all \( x \)
+  - $( p(x) \geq 0 $) for all $( x $)
   - The area under the curve is 1.
 
 Notation
 
-- \( p(x) \) denotes the probability density of any value of \( x \).
+- $( p(x) $) denotes the probability density of any value of $( x $).
 
 ```python
 import matplotlib.pyplot as plt
@@ -180,10 +180,10 @@ The pdf of a continuous random variable describes its probability distribution f
 
 ![Pdf](./src/img/mean.JPG)
 
-##### Mean (\( \mu \))
-The mean (\( \mu \)) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
+##### Mean ($( \mu $))
+The mean ($( \mu $)) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
 
-##### Variance (\( \sigma^2 \))
+##### Variance ($( \sigma^2 $))
 It quantifies the “dispersion” of the values around the mean.
 
 ##### Standard Deviation (\( \sigma \))
