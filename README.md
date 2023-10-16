@@ -309,14 +309,14 @@ Recall that variance measures the "dispersion" of values around the mean for a u
 
 For a multivariate variable with $( D $) individual variables, the covariance is represented as a $( D \times D $) matrix.
 
-\[
+$[
 \text{Cov}(\mathbf{X}) = \begin{pmatrix}
 \text{cov}(x_1, x_1) & \text{cov}(x_1, x_2) & \cdots & \text{cov}(x_1, x_D) \\
 \text{cov}(x_2, x_1) & \text{cov}(x_2, x_2) & \cdots & \text{cov}(x_2, x_D) \\
 \vdots & \vdots & \ddots & \vdots \\
 \text{cov}(x_D, x_1) & \text{cov}(x_D, x_2) & \cdots & \text{cov}(x_D, x_D)
 \end{pmatrix}
-\]
+$]
 
 Each entry $( \text{cov}(x_i, x_j) $) measures how much $( x_i $) and $( x_j $) co-vary around their means.
 
