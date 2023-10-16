@@ -180,11 +180,11 @@ The pdf of a continuous random variable describes its probability distribution f
 
 ![Pdf](./src/img/mean.JPG)
 
-##### Mean (\( $mu $))
+##### Mean
 The mean ($( \mu $)) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
 
 ##### Variance ($( \sigma^2 $))
-It quantifies the “dispersion” of the values around the mean.
+The Variance ($( \sigma^2 $)) quantifies the “dispersion” of the values around the mean.
 
 ##### Standard Deviation (\( \sigma \))
 The standard deviation (\( \sigma \)) is just its square root and is in the same scale as the r.v. values.
