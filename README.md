@@ -606,46 +606,46 @@ If the likelihood function reaches zero, we can't distinguish between the best $
 ##### Solution: Log-Likelihood
 To overcome this issue, we compute the likelihood in logarithmic scale. The formula for the log-likelihood is:
 
-\[
+$[
 \log \mathcal{L}(\theta) = \sum_{i=1}^{N} \log p(x_i | \theta)
-\]
+$]
 
 **Advantages:**  
 If a factor was, say, 0.001, and the log is in base 10, it becomes a -3 addendum in the sum. This way, we are less likely to go out of the numerical range.
 
 ##### Key Property
-Both the likelihood and the log-likelihood are maximized by the same \( \theta \).
+Both the likelihood and the log-likelihood are maximized by the same $( \theta $).
 
 #### MLE: Notable Examples
 
 ##### Categorical Variable with \(L\) Possible Values
-- **Parameters:** \( \theta = \{ p_1, p_2, \ldots, p_L \} \)
+- **Parameters:** $( \theta = \{ p_1, p_2, \ldots, p_L \} $)
 
-Let's say we have observed \( N \) samples in total, \( n_1 \) of the first value, \( n_2 \) of the second, etc. Then the probabilities can be calculated as:
+Let's say we have observed $( N $) samples in total, $( n_1 $) of the first value, $( n_2 $) of the second, etc. Then the probabilities can be calculated as:
 
-\[
+$[
 p_1 = \frac{n_1}{N}, \quad p_2 = \frac{n_2}{N}, \quad \ldots, \quad p_L = \frac{n_L}{N}
-\]
+$]
 
 **Example:**  
 Given 7 cars, 3 motorbikes, and 10 bicycles in total:
-- \( p(\text{car}) = \frac{7}{20} = 0.35 \)
-- \( p(\text{motorbike}) = \frac{3}{20} = 0.15 \)
-- \( p(\text{bicycle}) = \frac{10}{20} = 0.50 \)
+- $( p(\text{car}) = \frac{7}{20} = 0.35 $)
+- $( p(\text{motorbike}) = \frac{3}{20} = 0.15 $)
+- $( p(\text{bicycle}) = \frac{10}{20} = 0.50 $)
 
 #### Gaussian Distribution
 - **Parameters:** \( \theta = \{ \mu, \sigma^2 \} \)
 
 Very simply, we set:
-- \( \mu = \text{sample mean} \)
-- \( \sigma^2 = \text{sample variance} \)
+- $( \mu = \text{sample mean} $)
+- $( \sigma^2 = \text{sample variance} $)
 
 ### Multivariate Gaussian Distribution
-- **Parameters:** \( \theta = \{ \mu, \Sigma \} \)
+- **Parameters:** $( \theta = \{ \mu, \Sigma \} $)
 
 For the multivariate Gaussian distribution, the MLE parameters are:
-- \( \mu = \text{sample mean} \)
-- \( \Sigma = \text{sample covariance} \)
+- $( \mu = \text{sample mean} $)
+- $( \Sigma = \text{sample covariance} $)
 
 **Note:**  
 These choices maximize the likelihood function.
