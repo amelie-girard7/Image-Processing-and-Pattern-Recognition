@@ -180,7 +180,7 @@ The pdf of a continuous random variable describes its probability distribution f
 
 ![Pdf](./src/img/mean.JPG)
 
-##### Mean ($( \mu $))
+##### Mean (\( $mu $))
 The mean ($( \mu $)) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
 
 ##### Variance ($( \sigma^2 $))
