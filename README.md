@@ -295,9 +295,9 @@ The mean of a multivariate variable is an extension of the concept of the mean o
 
 Given $( D $) individual variables, the mean of each individual variable is calculated. These means are then "packed together" into a $( D \times 1 $) vector.
 
-\[
+$[
 \mu = [\mu_1, \mu_2, ..., \mu_D]^T
-\]
+$]
 
 In this notation, $( \mu $) is the vector that contains the means of each individual variable $( x_i $) for $( i = 1, 2, ..., D $).
 
