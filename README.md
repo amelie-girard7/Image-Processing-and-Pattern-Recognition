@@ -1117,7 +1117,7 @@ Similar to AUC-ROC, a higher AUPRC value is indicative of better drug performanc
 
 In multi-class classification scenarios, the confusion matrix becomes the go-to tool for performance evaluation. Consider a case with four distinct classes:
 
-$[
+\[
 \begin{array}{|c|c|c|c|c|}
 \hline
   & C1 & C2 & C3 & C4 \\
@@ -1131,7 +1131,7 @@ C3 & 0 & 0 & 34 & 6 \\
 C4 & 0 & 0 & 0 & 35 \\
 \hline
 \end{array}
-$]
+\]
 
 Metrics like accuracy and error rate can be naturally extended to this context. For more specific metrics, calculations can be focused on a per-class basis.
 
