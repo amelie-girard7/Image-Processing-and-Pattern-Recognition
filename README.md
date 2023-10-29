@@ -101,12 +101,12 @@ Examples
 - **Definition**: The function assigning a probability value to each of the numerical values. The pdf of a continuous random variable, p(x), (if it exists) gives us the density of probability in x
 
 - **Properties**: 
-  - \( p(x) \geq 0 \) for all \( x \)
+  - $( p(x) \geq 0 $) for all $( x $)
   - The area under the curve is 1.
 
 Notation
 
-- \( p(x) \) denotes the probability density of any value of \( x \).
+- $( p(x) $) denotes the probability density of any value of $( x $).
 
 ```python
 import matplotlib.pyplot as plt
@@ -192,14 +192,14 @@ The pdf of a continuous random variable describes its probability distribution f
 
 ![Pdf](./src/img/mean.JPG)
 
-##### Mean (\( \mu \))
-The mean (\( \mu \)) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
+##### Mean
+The mean ($( \mu $)) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
 
-##### Variance (\( \sigma^2 \))
-It quantifies the “dispersion” of the values around the mean.
+##### Variance
+The Variance ($( \sigma^2 $)) quantifies the “dispersion” of the values around the mean.
 
-##### Standard Deviation (\( \sigma \))
-The standard deviation (\( \sigma \)) is just its square root and is in the same scale as the r.v. values.
+##### Standard Deviation
+The standard deviation ($( \sigma $)) is just its square root and is in the same scale as the random variables values.
 
 These summary statistics can be computed exactly using integrals.
 
@@ -209,27 +209,27 @@ These summary statistics can be computed exactly using integrals.
 
 ##### Approximating Mean and Variance
 
-Often, the probability density function \( p(x) \) may not be available or the integrals required for exact calculations are not easy to compute. In such cases, it's common to approximate the statistical properties using a set of samples.
+Often, the probability density function $( p(x) $) may not be available or the integrals required for exact calculations are not easy to compute. In such cases, it's common to approximate the statistical properties using a set of samples.
 
-Assuming a set of samples \( x_i \), where \( i = 1, 2, \ldots, N \) are available, we can approximate the mean \( \mu \) and the variance \( \sigma^2 \) as follows:
+Assuming a set of samples $( x_i $), where $( i = 1, 2, \ldots, N $) are available, we can approximate the mean $( \mu $) and the variance $( \sigma^2 $) as follows:
 
 ###### Approximating the Mean
 
-The mean \( \mu \) can be approximated as the average of the samples:
+The mean $( \mu $) can be approximated as the average of the samples:
 
-\[
+$[
 \mu \approx \frac{1}{N} \sum_{i=1}^{N} x_i
-\]
+$]
 
 ###### Approximating the Variance
 
-The variance \( \sigma^2 \) can be approximated as:
+The variance $( \sigma^2 $) can be approximated as:
 
-\[
+$[
 \sigma^2 \approx \frac{1}{N} \sum_{i=1}^{N} (x_i - \mu)^2
-\]
+$]
 
-Here, \( \mu \) is the approximated mean as calculated above.
+Here, $( \mu $) is the approximated mean as calculated above.
 
 #### 3. Sample mean, sample covariance
 ```python
@@ -270,15 +270,15 @@ The Gaussian distribution, also known as the normal distribution, has many favor
 
 The Probability Density Function (PDF) of the Gaussian distribution is given by the following formula:
 
-\[
+$[
 p(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2}
-\]
+$]
 
 Here, the distribution is completely determined by two parameters:
-- \( \mu \): The mean of the distribution
-- \( \sigma^2 \): The variance of the distribution
+- $( \mu $): The mean of the distribution
+- $( \sigma^2 $): The variance of the distribution
 
-The mean \( \mu \) indicates where the peak of the distribution occurs, and the variance \( \sigma^2 \) indicates the spread or width of the distribution.
+The mean $( \mu $) indicates where the peak of the distribution occurs, and the variance $( \sigma^2 $) indicates the spread or width of the distribution.
 
 ## 5. Multivariate Random Variables
 
@@ -292,10 +292,10 @@ Examples could include:
 - The color channels of a pixel, represented as (R, G, B).
 
 
-We can denote the individual variables as \( x_i \), where \( i = 1, 2, ..., D \), and the entire multivariate random variable can be represented as \( \mathbf{X} = [x_1, x_2, ..., x_D]^T \).
+We can denote the individual variables as $( x_i $), where $( i = 1, 2, ..., D $), and the entire multivariate random variable can be represented as $( \mathbf{X} = [x_1, x_2, ..., x_D]^T $).
 
 
-Therefore, the probability of all these variables, \( p(x_1, x_2, ..., x_D) \), can be noted more compactly as \( p(\mathbf{X}) \).
+Therefore, the probability of all these variables, $( p(x_1, x_2, ..., x_D) $), can be noted more compactly as $( p(\mathbf{X}) $).
 
 
 The next section will discuss what happens to the mean and variance when dealing with multivariate random variables.
@@ -305,13 +305,13 @@ The next section will discuss what happens to the mean and variance when dealing
 The mean of a multivariate variable is an extension of the concept of the mean of a single variable.
 
 
-Given \( D \) individual variables, the mean of each individual variable is calculated. These means are then "packed together" into a \( D \times 1 \) vector.
+Given $( D $) individual variables, the mean of each individual variable is calculated. These means are then "packed together" into a $( D \times 1 $) vector.
 
-\[
+$[
 \mu = [\mu_1, \mu_2, ..., \mu_D]^T
-\]
+$]
 
-In this notation, \( \mu \) is the vector that contains the means of each individual variable \( x_i \) for \( i = 1, 2, ..., D \).
+In this notation, $( \mu $) is the vector that contains the means of each individual variable $( x_i $) for $( i = 1, 2, ..., D $).
 
 ## 6. Covariance Matrix or (Co)variance of a Multivariate Variable
 
@@ -319,44 +319,44 @@ The concept of variance extends to multivariate random variables but becomes mor
 
 Recall that variance measures the "dispersion" of values around the mean for a univariate random variable. In the multivariate setting, we are interested in how each pair of individual variables co-varies around their means.
 
-For a multivariate variable with \( D \) individual variables, the covariance is represented as a \( D \times D \) matrix.
+For a multivariate variable with $( D $) individual variables, the covariance is represented as a $( D \times D $) matrix.
 
-\[
+$[
 \text{Cov}(\mathbf{X}) = \begin{pmatrix}
 \text{cov}(x_1, x_1) & \text{cov}(x_1, x_2) & \cdots & \text{cov}(x_1, x_D) \\
 \text{cov}(x_2, x_1) & \text{cov}(x_2, x_2) & \cdots & \text{cov}(x_2, x_D) \\
 \vdots & \vdots & \ddots & \vdots \\
 \text{cov}(x_D, x_1) & \text{cov}(x_D, x_2) & \cdots & \text{cov}(x_D, x_D)
 \end{pmatrix}
-\]
+$]
 
-Each entry \( \text{cov}(x_i, x_j) \) measures how much \( x_i \) and \( x_j \) co-vary around their means.
+Each entry $( \text{cov}(x_i, x_j) $) measures how much $( x_i $) and $( x_j $) co-vary around their means.
 
 ##### Sample Mean and Sample Covariance for Multivariate Variables
 
-For multivariate variables with \(D\) dimensions and \(N\) samples, both the sample mean and sample covariance can be calculated.
+For multivariate variables with $(D$) dimensions and $(N$) samples, both the sample mean and sample covariance can be calculated.
 
-The sample mean is a <span style="color:red">\(D \times 1\)</span> vector given by:
+The sample mean is a <span style="color:red">$(D \times 1$)</span> vector given by:
 
 \[
 \mu = \frac{1}{N} \sum_{i=1}^{N} \mathbf{x}_i
 \]
 
 
-The sample covariance is a <span style="color:red">\(D \times D\)</span> matrix, and it's defined as:
+The sample covariance is a <span style="color:red">$(D \times D$)</span> matrix, and it's defined as:
 
 \[
 \Sigma = \frac{1}{N} \sum_{i=1}^{N} (\mathbf{x}_i - \mu)(\mathbf{x}_i - \mu)^T
 \]
 
-Note that the covariance matrix is <span style="color:red">\(D \times D\)</span> in size, arising from the product of a <span style="color:red">\(D \times 1\)</span> vector and its transpose, a \(1 \times D\) vector.
+Note that the covariance matrix is <span style="color:red">$(D \times D$)</span> in size, arising from the product of a <span style="color:red">$(D \times 1$)</span> vector and its transpose, a $(1 \times D$) vector.
 
 
 ##### The Expanded Form of Sample Covariance
 
 To understand sample covariance more deeply, it's useful to look at its expanded form.
 
-The expanded formula for the sample covariance matrix \( \Sigma \) is:
+The expanded formula for the sample covariance matrix $( \Sigma $) is:
 
 \[
 \begin{aligned}
@@ -418,9 +418,9 @@ plt.show()
 
 The multivariate Gaussian distribution extends the Gaussian distribution to more than one dimension.
 
-Let us assume for simplicity that \( X \) consists of only 2 measurements: \( X = [x_1, x_2] \). A function of \( X \), \( f(X) \), assigns a value to each value of \( X \), that is each pair of \( x_1 \) and \( x_2 \).
+Let us assume for simplicity that $( X $) consists of only 2 measurements: $( X = [x_1, x_2] $). A function of $( X $), $( f(X) $), assigns a value to each value of $( X $), that is each pair of $( x_1 $) and $( x_2 $).
 
-To plot \( f(X) \), we need 3 axes: one for \( f \), one for \( x_1 \), and one for \( x_2 \).
+To plot $( f(X) $), we need 3 axes: one for $( f $), one for $( x_1 $), and one for $( x_2 $).
 
 ```python
 # Import libraries for plotting and random number generation
@@ -458,13 +458,13 @@ plt.show()
 ![Multivariate Gaussian Distribution](./src/img/3D_multivariate_gaussian.JPG)
 
 
-The Gaussian PDF in \( D \) dimensions is controlled by two parameters, \( \mu \) and \( \Sigma \).
+The Gaussian PDF in $( D $) dimensions is controlled by two parameters, $( \mu $) and $( \Sigma $).
 
-For example, when \( D=2 \):
+For example, when $( D=2 $):
 - \( \mu = [0, 0]^T \)
 - \( \Sigma = \left[ \begin{array}{cc} 0.25 & 0.3 \\ 0.3 & 1 \end{array} \right] \)
 
-To visualize this, a 3D plot can be created where the axes represent \( X_1 \), \( X_2 \), and \( f(X) \).
+To visualize this, a 3D plot can be created where the axes represent $( X_1 $), $( X_2 $), and $( f(X) $).
 
 ```python
 # Import required libraries
@@ -526,25 +526,25 @@ Every distribution is fully identified by a set of parameters. For instance:
 - In the case of the categorical distribution, the parameters are the probabilities of the values.
 - In the case of the Gaussian distribution, they are the mean and the (co)variance.
 
-We can denote these parameters as \( \theta \), and make them explicit in the probability distribution as \( p(x|\theta) \).
+We can denote these parameters as $( \theta $), and make them explicit in the probability distribution as $( p(x|\theta) $).
 
 ##### Parameter Estimation: Fitting a Probability Distribution
 
-Let us assume that we are given a set of \( N \) samples of a random variable, \( x_i \), where \( i = 1, \ldots, N \).
+Let us assume that we are given a set of $( N $) samples of a random variable, $( x_i $), where $( i = 1, \ldots, N $).
 
-We want to "fit" a probability distribution, \( p(x|\theta) \), onto them. This means choosing the parameters, \( \theta \), of that distribution in an optimal way.
+We want to "fit" a probability distribution, $( p(x|\theta) $), onto them. This means choosing the parameters, $( \theta $), of that distribution in an optimal way.
 
 To make the term "optimal" meaningful, we need to define an optimality criterion and find a way to satisfy it.
 
 #### The Likelihood Function
 
-If we have \( N \) samples \( x_i, i = 1 \ldots N \), we want to "fit" a probability distribution onto them. This means choosing \( \theta \) in an optimal way.
+If we have $( N $) samples $( x_i, i = 1 \ldots N $), we want to "fit" a probability distribution onto them. This means choosing $( \theta $) in an optimal way.
 
 **What does "optimal" mean?**
 
 We need an optimality criterion. The likelihood function is given by:
 
-The likelihood function for \( N \) independent samples \( x_1, x_2, \ldots, x_N \) is given by:
+The likelihood function for $( N $) independent samples $( x_1, x_2, \ldots, x_N $) is given by:
 
 \[
 \mathcal{L}(\theta) = p(x_1|\theta) \cdot p(x_2|\theta) \cdot \ldots \cdot p(x_N|\theta) = \prod_{i=1}^{N} p(x_i|\theta)
@@ -552,11 +552,11 @@ The likelihood function for \( N \) independent samples \( x_1, x_2, \ldots, x_N
 
 #### Maximum Likelihood Estimation (MLE)
 
-A certain value of \( \theta \) may fit certain samples better than others. However, the goal is to maximize the likelihood function, requiring us to find a value "of compromise" for \( \theta \) such that the product of probabilities is maximized.
+A certain value of $( \theta $) may fit certain samples better than others. However, the goal is to maximize the likelihood function, requiring us to find a value "of compromise" for $( \theta $) such that the product of probabilities is maximized.
 
-For instance, if \( \theta \) leads to a probability of 0 for any of the samples, the entire product of probabilities goes to zero, making it a bad choice for the parameter.
+For instance, if $( \theta $) leads to a probability of 0 for any of the samples, the entire product of probabilities goes to zero, making it a bad choice for the parameter.
 
-Therefore, the process of choosing the value of \( \theta \) that maximizes this product is known as Maximum-Likelihood Estimation (MLE).
+Therefore, the process of choosing the value of $( \theta $) that maximizes this product is known as Maximum-Likelihood Estimation (MLE).
 
 ##### Example: MLE for Gaussian
 
@@ -565,8 +565,8 @@ The training set consists of 50 points generated from a Gaussian distribution wi
 
 ##### MLE Parameters
 The Maximum Likelihood Estimation (MLE) parameters for the Gaussian distribution are:
-- **Mean** (\( \mu \)): 0.14
-- **Standard Deviation** (\( \sigma \)): 1.13
+- **Mean** ($( \mu $)): 0.14
+- **Standard Deviation** ($( \sigma $)): 1.13
 
 #### Visualization
 The histogram shows the distribution of the training data points, and the curve represents the Gaussian distribution with the MLE parameters.
@@ -613,62 +613,62 @@ plt.show()
 The likelihood function is the product of many terms. For a categorical variable, these terms are always less than 1, and this is often the case for numerical variables as well. The product can easily reach a numerical zero.
 
 **Why is this a problem?**  
-If the likelihood function reaches zero, we can't distinguish between the best \( \theta \).
+If the likelihood function reaches zero, we can't distinguish between the best $( \theta $).
 
 ##### Solution: Log-Likelihood
 To overcome this issue, we compute the likelihood in logarithmic scale. The formula for the log-likelihood is:
 
-\[
+$[
 \log \mathcal{L}(\theta) = \sum_{i=1}^{N} \log p(x_i | \theta)
-\]
+$]
 
 **Advantages:**  
 If a factor was, say, 0.001, and the log is in base 10, it becomes a -3 addendum in the sum. This way, we are less likely to go out of the numerical range.
 
 ##### Key Property
-Both the likelihood and the log-likelihood are maximized by the same \( \theta \).
+Both the likelihood and the log-likelihood are maximized by the same $( \theta $).
 
 #### MLE: Notable Examples
 
 ##### Categorical Variable with \(L\) Possible Values
-- **Parameters:** \( \theta = \{ p_1, p_2, \ldots, p_L \} \)
+- **Parameters:** $( \theta = \{ p_1, p_2, \ldots, p_L \} $)
 
-Let's say we have observed \( N \) samples in total, \( n_1 \) of the first value, \( n_2 \) of the second, etc. Then the probabilities can be calculated as:
+Let's say we have observed $( N $) samples in total, $( n_1 $) of the first value, $( n_2 $) of the second, etc. Then the probabilities can be calculated as:
 
-\[
+$[
 p_1 = \frac{n_1}{N}, \quad p_2 = \frac{n_2}{N}, \quad \ldots, \quad p_L = \frac{n_L}{N}
-\]
+$]
 
 **Example:**  
 Given 7 cars, 3 motorbikes, and 10 bicycles in total:
-- \( p(\text{car}) = \frac{7}{20} = 0.35 \)
-- \( p(\text{motorbike}) = \frac{3}{20} = 0.15 \)
-- \( p(\text{bicycle}) = \frac{10}{20} = 0.50 \)
+- $( p(\text{car}) = \frac{7}{20} = 0.35 $)
+- $( p(\text{motorbike}) = \frac{3}{20} = 0.15 $)
+- $( p(\text{bicycle}) = \frac{10}{20} = 0.50 $)
 
 #### Gaussian Distribution
 - **Parameters:** \( \theta = \{ \mu, \sigma^2 \} \)
 
 Very simply, we set:
-- \( \mu = \text{sample mean} \)
-- \( \sigma^2 = \text{sample variance} \)
+- $( \mu = \text{sample mean} $)
+- $( \sigma^2 = \text{sample variance} $)
 
 ### Multivariate Gaussian Distribution
-- **Parameters:** \( \theta = \{ \mu, \Sigma \} \)
+- **Parameters:** $( \theta = \{ \mu, \Sigma \} $)
 
 For the multivariate Gaussian distribution, the MLE parameters are:
-- \( \mu = \text{sample mean} \)
-- \( \Sigma = \text{sample covariance} \)
+- $( \mu = \text{sample mean} $)
+- $( \Sigma = \text{sample covariance} $)
 
 **Note:**  
 These choices maximize the likelihood function.
 
 #### Other Cases: Beyond Closed-Form Solutions
 
-In the cases of the categorical and Gaussian distributions, the MLE parameters can be computed in "closed form" (e.g., \( p_1 = \ldots \), \( \mu = \ldots \), etc.). However, not all distributions allow for such straightforward calculations.
+In the cases of the categorical and Gaussian distributions, the MLE parameters can be computed in "closed form" (e.g., $( p_1 = \ldots $), $( \mu = \ldots $), etc.). However, not all distributions allow for such straightforward calculations.
 
 #### Distributions Requiring Iterative Algorithms
 
-For many other useful distributions, such as the Gamma distribution, the Student's \( t \)-distribution, etc., the MLE parameters (all or some) need to be determined with iterative algorithms.
+For many other useful distributions, such as the Gamma distribution, the Student's $( t $)-distribution, etc., the MLE parameters (all or some) need to be determined with iterative algorithms.
 
 #### Gaussian Mixture Model (GMM)
 
