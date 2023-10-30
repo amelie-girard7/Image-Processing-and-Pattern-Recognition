@@ -4,7 +4,7 @@ This repository is my notes on key concepts in probability and statistics, based
 
 # Agenda
 
-1. [Probability and statistics fundamentals: random variables and distributions](#i-probability-and-statistics-fundamentals-random-variables-and-distributions)
+1. [Chapter: Probability and statistics fundamentals: random variables and distributions](#i-chapter-probability-and-statistics-fundamentals-random-variables-and-distributions)
     1. [Random variables: categorical and numerical](#1-random-variables)
     2. [Mean and variance](#2-mean-and-variance)
     3. [Sample mean, sample covariance](#3-sample-mean-sample-covariance)
@@ -14,17 +14,23 @@ This repository is my notes on key concepts in probability and statistics, based
     7. [The multivariate Gaussian distribution](#7-the-multivariate-gaussian-distribution)
     8. [Fitting the lot: parameter estimation](#8fitting-the-lot-parameter-estimation)
   
-2. [Fundamentals of classification](#ii-fundamentals-of-classification)
+2. [Chapter: Fundamentals of classification](#ii-chapter-fundamentals-of-classification)
     1. [The linear model](#1-the-linear-model)
     2. [Multinomial logistic regression](#2-multinomial-logistic-regression)
     3. [Other popular classifiers](#3-other-popular-classifiers)
     4. [How to evaluate performance](#4-how-to-evaluate-performance)
 
+3. [Chapter: Deep learning for computer vision](#iii-chapter-Deep-learning-for-computer-vision)
+    1. [Build a CNN for image classification from scratch](#1-build-a-cnn-for-image-classification-from-scratch)
+    2. [Multinomial image classification](#2-multiclass-image-classification)
+    3. [Multinomial video classification](#3-multiclass-video-classification)
+    4. [Image segmentation](#4-image-segmentation)
 
 
 
 
-# Probability and statistics fundamentals: random variables and distributions
+
+# Chapter1: Probability and statistics fundamentals: random variables and distributions
 # 1. Random Variables
 
 - **Definition**: A variable whose outcome is determined by a random event.
@@ -1378,3 +1384,191 @@ accuracy = accuracy_score(y_test, y_pred)
 print(f'Accuracy: {accuracy * 100:.2f}%')
 
 ```
+# Chapter: Deep learning
+Deep learning refers to the utilisation of neural networks that have multiple layers. Although neural networks, also known as Artificial Neural Networks (ANNs), gained significant attention in the 1990s, they fell out of favor for a period, being largely replaced by Support Vector Machines (SVMs) in the early 2000s. However, around 2006, neural networks experienced a resurgence, fueled by more intricate architectures. Today, they are the leading technology in fields like computer vision, natural language processing, signal processing, and big data analysis.
+
+## Typical layer
+A typical layer of a neural network is identical to a logistic regression classifier!:
+
+![tlayer](./src/img/tlayer.png)
+from Jed Fox, Neural Networks 101
+
+The input features are weighted by corresponding coefficients and summed together, along with an added offset known as the bias term. This summed value is then passed through a nonlinear activation function, such as sigmoid (for binary classification), softmax, tanh, or ReLU.
+
+## Basic overall scheme
+In deep learning, the basic flow starts with an input \( x \). This input is typically processed through a sigmoid activation function initially. The output from the sigmoid function is then subjected to a weighted sum, denoted as \( Wx \), where \( W \) represents the weights. At this stage, you have two primary options:
+
+1. For regression tasks, you can keep the output as is, ranging from \( -\infty \) to \( +\infty \).
+2. For classification tasks, you pass this weighted sum through another sigmoid function, which scales the output between 0 and 1.
+
+Finally, the result of either of these pathways becomes the output \( y \). This simplified explanation encapsulates the core idea behind the basic overall scheme in neural networks.
+
+![scheme](./src/img/scheme.png)
+
+## Training: backpropagation
+The loss function, denoted as \( \Delta(y_i, y) \), measures the discrepancy between the true label \( y_i \) and the predicted output \( y \). The parameters across different layers are represented by \( w \). The objective is to minimize this loss function \( \Delta(y_i, y) \) by leveraging its gradients with respect to the parameters \( w \).
+
+
+The gradient of the loss function \( \Delta(y_i, y(W_{N})) \) with respect to the weights \( W_N \) in the output layer \( N \) can be written using the chain rule as:
+
+\[
+\frac{{\partial \Delta(y_i, y(W_{N}))}}{{\partial W_N}} = \frac{{\partial \Delta(y_i, y)}}{{\partial y}} \times \frac{{\partial y}}{{\partial W_N}}
+\]
+
+And for the weights \( W_{N-1} \) in layer \( N-1 \):
+
+\[
+\frac{{\partial \Delta(y_i, y(h(W_{N-1})))}}{{\partial W_N-1}} = \frac{{\partial \Delta(y_i, y)}}{{\partial y}}  \times \frac{{\partial y}}{{\partial h}} \times \frac{{\partial h}}{{\partial W_N-1}}
+\]
+
+These gradients are used to update \( W_N \) and \( W_{N-1} \) during the backpropagation process to minimize \( \Delta(y_i, y) \).
+
+## First-order methods
+The loss function \( \Delta(y_i, y) \) is often multi-dimensional and depends on multiple parameters \( \mathbf{w} \). Therefore, its derivative with respect to \( \mathbf{w} \) becomes a gradient, which is a vector of partial derivatives. 
+
+The update equation can be more precisely written as:
+
+\[
+w_{n+1} = w_n - \eta \frac{\partial \Delta(w_n)}{\partial w_n}
+\]
+
+
+![first-order](./src/img/first-order.png)
+
+Here  the graph illustrates the loss function, \( \Delta \), in relation to a single parameter, \( w \). The optimal parameter value, denoted as \( w^* \), is the target the training algorithm aims for, as it minimizes \( \Delta \). After the \( n^{th} \) training iteration, the parameter stands at \( w[n] \).
+
+The algorithm then calculates \( \Delta \)'s derivative at \( w[n] \), which geometrically represents the slope of the tangent line to the curve. Here, the slope is evidently negative (downward direction). The derivative, when negated and scaled by a factor \( \eta \) (known as the "learning rate"), is added to \( w[n] \) to yield \( w[n+1] \). After several iterations, the algorithm should ideally converge to, or nearly reach, \( w^* \).
+
+It's crucial to note that a large \( \eta \) could speed up convergence but also risk overshooting \( w^* \), potentially landing in a different, less optimal region of \( \Delta \). Thus, \( \eta \) is a hyperparameter requiring careful selection.
+
+Commonly used optimization algorithms include Adam, AdamW, Adagrad, and Stochastic Gradient Descent (SGD).
+
+## Automatic differentiation
+The concept of automatic differentiation (often abbreviated as autodiff) has revolutionised the way derivatives are computed in machine learning frameworks. In the past, you would have to manually derive the mathematical expressions for gradients, which could be both complex and prone to errors.
+
+Automatic differentiation automates this process. It computes the derivatives based on the actual computations being performed, thereby making the gradient computation both exact and automatic. This is particularly useful in neural networks where the error gradient has to be propagated back through the layers of the network. Autodiff ensures that this backpropagation is efficiently and accurately calculated.
+
+Overall, autodiff has become an indispensable tool in modern machine learning, simplifying the implementation and potentially speeding up the training of complex models.
+
+
+Popular libraries include PyTorch, TensorFlow, JAX
+
+![autodiff](./src/img/autodiff.png)
+courtesy of JAX
+
+## Development tools
+Numerous libraries exist for development in this field, such as Caffe, CNTK, Keras, Torch, TensorFlow, and MXNet/Gluon. While most are Python-based, some also support Matlab. Currently, PyTorch, mainly developed at Facebook AI Research Lab (FAIR), and TensorFlow 2.X, from the Google Brain team, are arguably the most widely used. TensorFlow 2.X represents a significant advancement over its predecessor, offering features now comparable to PyTorch.
+
+## TensorBoard etc
+![tensorboard](./src/img/tensorboard.png)
+TensorBoard, WandB, and MLflow provide a variety of valuable utilities for monitoring and understanding the behavior of machine learning models.
+
+## Most popular deep networks for classification
+
+- Feed-forward neural networks (FFNNs) 
+- Basic convolutional neural networks (CNNs)
+- Complex CNNs (AlexNet, ResNet, GoogLeNet…)
+- Recurrent neural networks (RNNs) such as LSTMs and Transformers – *to classify sequential data*
+(and also: deep belief networks, deep stacking networks, deep autoencoders…)
+
+## Convolutional neural networks (CNNs)
+![cnn](./src/img/cnn.png)
+courtesy of Sumith Saha and Towards Data Science (TDS)
+
+
+CNNs are, fundamentally, a stack of filters (aka "kernels") applied to input patches, until the final layer outputs one probability per class
+Understanding the working of the filters is not immediate because of various factors:
+The size of the input patches
+The size of the filters
+With what step ("stride") the filter is applied
+Whether the filter fits onto the patch an exact number of times, or some "zero-padding" is needed
+An excellent explanation is here: https://towardsdatascience.com/a-comprehensible-explanation-of-the-dimensions-in-cnns-841dba49df5e
+
+**Filters: basics**
+The filter is utilised with a stride of 2 in both horizontal and vertical directions. The final row and column are omitted because they don't align. Alternatively, you can append an additional row and column of zeros to accommodate the filter one more time.
+
+![filter](./src/img/filter.png)
+courtesy of Felizia Quetscher, Towards Data Science
+
+**A realistic example**
+![kernel](./src/img/kernel.png)
+
+- A **3 x 3** kernel is applied with stride = 2 to an input patch of **13 x 13**; it fits **6 x 6** times
+- This is done **16** times along the "channel" (depth) dimension, and added up
+- NB: the depth of the input patch and the depth of the kernel must always be equal
+- The lot is repeated twice with **2** sets of filters (top-right value in grey colour)
+
+## Image classification
+Image classification becomes simple at this point: 
+The final output is a vector whose length is \( M \), representing the number of classes you're categorizing the images into. 
+This vector undergoes a softmax layer, represented mathematically as \( \frac{e^x}{\sum e^x} \), to convert the values into legitimate probabilities, meaning each value is between 0 and 1 and the sum of all values is 1. 
+The class is typically determined by the highest probability value.
+
+**Activation functions**
+- The softmax is like the sigmoid/logistic, but for M > 2
+- Many others have been proposed (!)
+![activation-af](./src/img/activation-af.png)
+Courtesy of https://www.v7labs.com/
+
+## Output layer activation functions
+The activation function of the output layer is aligned with the specific task at hand:
+- For binary classification where \( M = 2 \), a sigmoid function is used.
+- For multiclass classification with \( M > 2 \), softmax is employed.
+- For multiple binary classification issues, termed as "multilabel," one sigmoid function is applied for each label.
+- For regression tasks, often denoted as "M = 1," a linear activation function is used, allowing for any value in the range of \(-\infty\) to \(+\infty\).
+
+![activation](./src/img/activation.png)
+Courtesy of the amazing Jason Brownlee, Machine Learning Mastery
+
+## Max pooling and batch normalisation
+Two other common ingredients are "max pooling" (just pick the largest value of a patch) and batch normalisation (change the mean/stdev of each batch to a learnable value) 
+![max-pooling-1](./src/img/max-pooling-1.png)
+
+![max pooling2](./src/img/max-pooling-2.png)
+
+## Deep network training
+In deep learning, it is common to train the model with millions of training samples, possibly for weeks
+You do not want to redo this all from scratch when you train the network for your task
+So, you typically start from a pretrained network, change the final layers, and fine-tune it with a much smaller dataset.
+
+See: https://au.mathworks.com/help/deeplearning/ug/pretrained-convolutional-neural-networks.html
+
+## Video classification
+Video classification can be performed very simply:
+- classify each frame into a class
+- assign the video to the majority class
+
+However, such a crude approach fails to capture the sequential dependencies between frames in the videos (the content does not vary abruptly).
+
+A better alternative:
+- extract a feature vector from each frame
+- use a sequential classifier (an RNN, e.g. LSTM, GRU, or a Transformer) to assign the video to a class
+
+## The LSTM
+
+![lstm](lstm.png)
+from wikipedia
+
+## The Transformer's encoder
+BERT is shaped over the Transformer's encoder and is the current workhorse of sequential classification tasks
+![transformers](./src/img/transformers.png)
+courtesy of Jay Alammar
+
+## Semantic segmentation: U-Net
+What if you have to classify individual pixels rather than the whole image?
+Then, you can use networks like the U-Net:
+![u-net](./src/img/u-net.png)
+
+## CLIP, Stable Diffusion and the future
+Other networks integrating text and images have surged to fame:
+- CLIP uses pairs of images and their captions to classify new images in any class of choice, without re-training
+- Stable Diffusion takes in input textual descriptions of scenes and generates stunning images
+
+This is likely to advance  in the near future
+![CLIP](./src/img/clip.png)
+courtesy of Guodong (Troy) Zhao
+
+## Resources
+- Towards Data Science (TDS) offers spectacular, world-famous blogs
+- Papers with Code collects all the state-of-the-art results, papers and their code (have a look at their home page)
+
