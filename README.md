@@ -1390,7 +1390,7 @@ Deep learning refers to the utilisation of neural networks that have multiple la
 ## Typical layer
 A typical layer of a neural network is identical to a logistic regression classifier!:
 
-![tlayer](./src/img/tlayer.png)
+![tlayer](./src/img/t-layer.png)
 from Jed Fox, Neural Networks 101
 
 The input features are weighted by corresponding coefficients and summed together, along with an added offset known as the bias term. This summed value is then passed through a nonlinear activation function, such as sigmoid (for binary classification), softmax, tanh, or ReLU.
