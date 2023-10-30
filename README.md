@@ -1546,7 +1546,7 @@ A better alternative:
 
 ## The LSTM
 
-![lstm](lstm.png)
+![lstm](./src/img/lstm.png)
 from wikipedia
 
 ## The Transformer's encoder
