@@ -1,5 +1,4 @@
-# Probability and Statistics Fundamentals
-
+# Image processing and pattern recognition 
 This repository is my notes on key concepts in probability and statistics, based on Prof. Massimo Piccardi's course Image Processing and Pattern Recognition 31256/42177. These principles are foundational for statistical pattern recognition and machine learning.
 
 # Agenda
@@ -26,40 +25,44 @@ This repository is my notes on key concepts in probability and statistics, based
     3. [Multinomial video classification](#3-multiclass-video-classification)
     4. [Image segmentation](#4-image-segmentation)
 
+# Chapter 1: Probability and statistics fundamentals: random variables and distributions
 
+This chapter will be run in the context of this case study; you're a Data Specialist for a multinational chain of private universities. The director is planning to standardise facilities across campuses worldwide. To do this effectively, you need to understand the characteristics of students, such as their heights, for ordering appropriately sized desks and lecture hall seating.
 
+How can you leverage the principles of probability and statistics to understand student characteristics like height, age, and country of origin, so that the director can make informed decisions about facility standardisation?
 
-
-# Chapter1: Probability and statistics fundamentals: random variables and distributions
 # 1. Random Variables
 
-- **Definition**: A variable whose outcome is determined by a random event.
-- **Types**: Categorical (finite outcomes) and numerical (infinite outcomes).
+A random variable is a variable whose outcome is determined by a random event, eg. students height, age or country are random variables, the outcomes of which are determined by random events like birth, genetics, and location.
+
+Random variables can be categorical (finite outcomes; eg. country of origin) or numerical (infinite outcomes; eg. height and age).
+
 
 ## 1.1 Categorical Random Variables
+We will start by analysing student nationality as a starting point that provides valuable cultural and logistical insights that can be specific to different countries.
 
-- **Example**: 'Country' with five possible values: Italy, Australia, China, Spain, New Zealand.
-- **Probabilities**:
+The table represents the probabilities of students coming from different countries in a sample university. The "Probability" column is expressed as a percentage of the total student population.
 
-| Country      | Probability |
-| ------------ | ----------- |
-| Italy        | 0.18        |
-| Australia    | 0.25        |
-| China        | 0.38        |
-| Spain        | 0.10        |
-| New Zealand  | 0.09        |
+
+| Country       | Probability   |
+|---------------|---------------|
+| Italy         | 0.18          |
+| Australia     | 0.25          |
+| China         | 0.38          |
+| Spain         | 0.10          |
+| New Zealand   | 0.09          |
 
 ### Probability Mass Function (PMF)
+The probability mass function maps each outcome of a discrete variable to its probability.
 
-- **Definition**: Maps each outcome of a discrete variable to its probability.
-- **Properties**:
   - All probabilities are non-negative.
   - Sum of all probabilities is 1.
 
-Example: Country PMF
+**Example: Country PMF**
+- All listed probabilities are ≥ 0.
+- \(0.18 + 0.25 + 0.38 + 0.10 + 0.09 = 1\)
 
-- **Non-negative**: All listed probabilities are ≥ 0.
-- **Sum to One**: \(0.18 + 0.25 + 0.38 + 0.10 + 0.09 = 1\)
+In the code, the bar chart serves as a visual representation of the PMF for a given dataset of countries. Each bar represents a country, and its height indicates the probability of that country appearing in a random sample. The probabilities sum up to 1, as they represent a complete sample space.
 
 [Notebook with Plots](./src/chapter1/probability_mass_function_country.ipynb)
 
@@ -81,63 +84,64 @@ axs[0].set(xlabel='Countries', ylabel='Probability', title='Country PMF')
 axs[0].set_xticklabels(countries, rotation=45)
 axs[0].set_ylim([0, 0.5])
 
-# Pie chart: Probabilities
+# Pie Chart: Plotting the Probability Mass Function (PMF)
 axs[1].pie(probabilities, labels=countries, autopct='%1.2f%%', startangle=90)
-axs[1].set_title('Country Probability Pie Chart')
-axs[1].axis('equal')
+axs[1].set_title('Pie Chart for Variable Country')  # Chart title
+axs[1].axis('equal')  # Ensures the pie chart is a circle
 
 # Show plots
 plt.show()
 ```
 
-![probability](./src/img/probability_by_country.JPG)
+![probability](./src/img/pmf.png)
 
 ## 1.2 Numerical Random Variables
+We'll now concentrate solely on the heights of students, setting aside all other characteristics. Student height is a continuous numerical random variable, ranging within a specific interval, such as between 0 cm and 280 cm.
 
-- **Definition**: A variable whose outcomes can take any number in a range.
-- **Types**: Continuous (infinite outcomes in an interval) and discrete (countable outcomes).
-  
-Examples
+**Probability density function PDF**
+This code  generates a Gaussian Probability Density Function (PDF) with a mean (\( \mu \)) of 170 cm and a standard deviation (\( \sigma \)) of 10 cm. The x-axis represents height in cm, and the y-axis represents the probability density. The curve shows how heights are distributed around the mean, indicating that heights close to 170 cm are more probable.
 
-- **Continuous**: Height of a person, weight of a person, intensity of a pixel in an image.
-- **Discrete**: Number of employees in a company, scores on a test.
-
-### Probability Density Function (PDF)
-
-- **Definition**: The function assigning a probability value to each of the numerical values. The pdf of a continuous random variable, p(x), (if it exists) gives us the density of probability in x
-
-- **Properties**: 
-  - $( p(x) \geq 0 $) for all $( x $)
-  - The area under the curve is 1.
-
-Notation
-
-- $( p(x) $) denotes the probability density of any value of $( x $).
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import norm
 
-# Generate the x values: from -2 to 2 in steps of 0.1
-x = np.arange(-2, 2.1, 0.1)
+# Parameters for the Gaussian distribution
+mean = 170  # mean height in cm
+std_dev = 10  # standard deviation in cm
 
-# Compute the pdf of a normal distribution with mean 0 and std 0.25
-pdf_values = norm.pdf(x, 0, 0.25)
+# Generate data points
+x = np.linspace(mean - 4*std_dev, mean + 4*std_dev, 1000)
+y = norm.pdf(x, mean, std_dev)
 
-# Create the plot
-plt.plot(x, pdf_values)
-plt.title('Gaussian PDF with mean 0 and std 0.25')
-plt.xlabel('x')
-plt.ylabel('pdf(x)')
+# Plot Gaussian PDF
+plt.figure(figsize=(12, 6))
+plt.plot(x, y, label=f'Normal Distribution\nMean = {mean}\nStandard Deviation = {std_dev}')
+
+# Add lines to indicate mean and standard deviation
+plt.axvline(mean, color='r', linestyle='--', linewidth=1, label=f'Mean: {mean}')
+plt.axvline(mean - std_dev, color='g', linestyle='--', linewidth=1, label=f'1 Std Dev: {mean - std_dev}')
+plt.axvline(mean + std_dev, color='g', linestyle='--', linewidth=1, label=f'1 Std Dev: {mean + std_dev}')
+
+# Labels and title
+plt.title('Gaussian PDF of Heights')
+plt.xlabel('Height (cm)')
+plt.ylabel('Probability Density')
+plt.legend()
+
+# Show the plot
 plt.show()
 ```
-![Pdf](./src/img/pdf.JPG)
+![pdf](./src/img/pdf.png)
+
+  \[
+  f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)
+  \]
 
 
-The so-called “random” numbers differ in their probability distributions!. for example: 
-
-Gaussian Distribution: The plot shows 100 samples from a Gaussian distribution with mean 0 and standard deviation 2. You can see the classic "bell curve" shape.
+***Gaussian distribution***
+ This plot shows 100 samples from a Gaussian distribution. The shape of the  distribution changes depending on the values on mean and standard deviation. With mean 0 and standard deviation 2, you can see the classic "bell curve" shape.
 
 ```python
 # Generate 100 samples from a Gaussian (Normal) distribution with mean 0 and standard deviation 2
@@ -157,7 +161,7 @@ plt.show()
 ```
 ![Gaussian](./src/img/gaussian.JPG)
 
-Uniform Distribution: The plot shows 100 samples from a uniform distribution between 0 and 2. The frequency of each bin should be roughly equal, given that the distribution is uniform.
+***Uniform Distribution***: The plot shows 100 samples from a uniform distribution between 0 and 2. The frequency of each bin should be roughly equal, given that the distribution is uniform.
 
 ```python
 X_uniform = np.random.uniform(0, 2, (100, 1))
@@ -173,7 +177,9 @@ plt.show()
 ```
 ![Uniform](./src/img/uniform.JPG)
 
-Student's t-Distribution: The third plot shows 100 samples from a Student's t-distribution with 1.5 degrees of freedom, a location of 0, and a scale of 2. The distribution is somewhat similar to the Gaussian distribution but has heavier tails.
+***Student's t-Distribution***
+
+This plot shows 100 samples from a Student's t-distribution with 1.5 degrees of freedom, a location of 0, and a scale of 2. The distribution is somewhat similar to the Gaussian distribution but has heavier tails.
 
 ```python
 df = 1.5  # degrees of freedom
@@ -199,13 +205,13 @@ The pdf of a continuous random variable describes its probability distribution f
 ![Pdf](./src/img/mean.JPG)
 
 ##### Mean
-The mean ($( \mu $)) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
+The mean $( \mu $) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
 
 ##### Variance
-The Variance ($( \sigma^2 $)) quantifies the “dispersion” of the values around the mean.
+The Variance $( \sigma^2 $) quantifies the “dispersion” of the values around the mean.
 
 ##### Standard Deviation
-The standard deviation ($( \sigma $)) is just its square root and is in the same scale as the random variables values.
+The standard deviation $( \sigma $) is just its square root and is in the same scale as the random variables values.
 
 These summary statistics can be computed exactly using integrals.
 
@@ -237,7 +243,7 @@ $]
 
 Here, $( \mu $) is the approximated mean as calculated above.
 
-#### 3. Sample mean, sample covariance
+#### 3. Sample mean and covariance
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -1390,7 +1396,8 @@ Deep learning refers to the utilisation of neural networks that have multiple la
 ## Typical layer
 A typical layer of a neural network is identical to a logistic regression classifier!:
 
-![tlayer](./src/img/tlayer.png)
+![tlayer](./src/img/t-layer.png)
+
 from Jed Fox, Neural Networks 101
 
 The input features are weighted by corresponding coefficients and summed together, along with an added offset known as the bias term. This summed value is then passed through a nonlinear activation function, such as sigmoid (for binary classification), softmax, tanh, or ReLU.
