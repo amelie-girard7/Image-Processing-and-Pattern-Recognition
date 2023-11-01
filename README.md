@@ -1,4 +1,4 @@
-# Probability and Statistics Fundamentals
+# Image Processing and Pattern Recognition
 
 This repository is my notes on key concepts in probability and statistics, based on Prof. Massimo Piccardi's course Image Processing and Pattern Recognition 31256/42177. These principles are foundational for statistical pattern recognition and machine learning.
 
