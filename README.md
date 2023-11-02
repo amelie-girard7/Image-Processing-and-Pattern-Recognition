@@ -4,14 +4,14 @@ This repository is my notes on key concepts in probability and statistics, based
 # Agenda
 
 1. [Chapter: Probability and statistics fundamentals: random variables and distributions](#i-chapter-probability-and-statistics-fundamentals-random-variables-and-distributions)
-    1. [Random variables: categorical and numerical](#1-random-variables)
-    2. [Mean and variance](#2-mean-and-variance)
-    3. [Sample mean, sample covariance](#3-sample-mean-sample-covariance)
-    4. [The Gaussian distribution](#4-the-gaussian-distribution)
-    5. [Multivariate random variables](#5-multivariate-random-variables)
-    6. [The covariance matrix](#6-covariance-matrix-or-covariance-of-a-multivariate-variable)
-    7. [The multivariate Gaussian distribution](#7-the-multivariate-gaussian-distribution)
-    8. [Fitting the lot: parameter estimation](#8fitting-the-lot-parameter-estimation)
+    1. [Random variables: categorical and numerical](#random-variables-categorical-and-numerical)
+        - [Mean and variance](#mean-and-variance)
+        - [Sample mean, Sample covariance](#sample-mean-sample-covariance)
+        - [Probability distributions: Gaussian, Uniform, t-student ](#probability-distribution-gaussian-uniform-t-student)
+    2. [Multivariate random variables](#2-multivariate-random-variables)
+    3. [The covariance matrix](#3-covariance-matrix-or-covariance-of-a-multivariate-variable)
+    4. [The multivariate Gaussian distribution](#4-the-multivariate-gaussian-distribution)
+    5. [Fitting the lot: parameter estimation](#5-fitting-the-lot-parameter-estimation)
   
 2. [Chapter: Fundamentals of classification](#ii-chapter-fundamentals-of-classification)
     1. [The linear model](#1-the-linear-model)
@@ -27,45 +27,39 @@ This repository is my notes on key concepts in probability and statistics, based
 
 # Chapter 1: Probability and statistics fundamentals: random variables and distributions
 
-This chapter will be run in the context of this case study; you're a Data Specialist for a multinational chain of private universities. The director is planning to standardise facilities across campuses worldwide. To do this effectively, you need to understand the characteristics of students, such as their heights, for ordering appropriately sized desks and lecture hall seating.
+In this section, set within a case study,  you're a Lead Data specialist at a multinational robotics corporation specialising in personalised robotic assistants designed to improve the quality of life for individuals around the world. The company is on the brink of launching a new line of robots that can be customised based on the user's height, age, and country of residence.
 
-How can you leverage the principles of probability and statistics to understand student characteristics like height, age, and country of origin, so that the director can make informed decisions about facility standardisation?
+How can you apply statistical and probabilistic methods to gain insights shaping a new generation of robots that are not just functional but deeply personalised to the users caracteristics?
 
 # 1. Random Variables
+A random variable is a variable whose outcome is determined by a random event. For instance, users height, age or country are random variables, the outcomes of which are determined by random events like birth, genetics, and location.
 
-A random variable is a variable whose outcome is determined by a random event, eg. students height, age or country are random variables, the outcomes of which are determined by random events like birth, genetics, and location.
-
-Random variables can be categorical (finite outcomes; eg. country of origin) or numerical (infinite outcomes; eg. height and age).
-
+Random variables can be:
+- Categorical (finite outcomes; eg. country).
+- Numerical (infinite outcomes; eg. height and age).
 
 ## 1.1 Categorical Random Variables
-We will start by analysing student nationality as a starting point that provides valuable cultural and logistical insights that can be specific to different countries.
+We'll begin by examining the countries of origin for the users. The following table shows the likelihood of users being from various countries within a representative users sample. The "Probability" column indicates these probabilities as a fraction of the overall users body.
 
-The table represents the probabilities of students coming from different countries in a sample university. The "Probability" column is expressed as a percentage of the total student population.
+| Users Country   | Probability   |
+|-----------------|---------------|
+| Italy           | 0.18          |
+| Australia       | 0.25          |
+| China           | 0.38          |
+| Spain           | 0.10          |
+| New Zealand     | 0.09          |
 
+### Probability mass function (PMF)
+the probability mass function maps each outcome of a discrete variable to its probability. All probabilities are non-negative and the sum of all probabilities is 1.
 
-| Country       | Probability   |
-|---------------|---------------|
-| Italy         | 0.18          |
-| Australia     | 0.25          |
-| China         | 0.38          |
-| Spain         | 0.10          |
-| New Zealand   | 0.09          |
-
-### Probability Mass Function (PMF)
-The probability mass function maps each outcome of a discrete variable to its probability.
-
-  - All probabilities are non-negative.
-  - Sum of all probabilities is 1.
-
-**Example: Country PMF**
+for the example of users countries listed above:
 - All listed probabilities are ≥ 0.
 - \(0.18 + 0.25 + 0.38 + 0.10 + 0.09 = 1\)
 
-In the code, the bar chart serves as a visual representation of the PMF for a given dataset of countries. Each bar represents a country, and its height indicates the probability of that country appearing in a random sample. The probabilities sum up to 1, as they represent a complete sample space.
+ the bar chart serves as a visual representation of the PMF for a given dataset of countries. Each bar represents a country, and its height indicates the probability of that country appearing in a random sample. The probabilities sum up to 1, as they represent a complete sample space.
+ ![probability](./src/img/pmf.png)
 
-[Notebook with Plots](./src/chapter1/probability_mass_function_country.ipynb)
-
+[Download here](./src/chapter1/probability_mass_function_country.ipynb)
 ```python
 # Import libraries
 import matplotlib.pyplot as plt
@@ -93,14 +87,26 @@ axs[1].axis('equal')  # Ensures the pie chart is a circle
 plt.show()
 ```
 
-![probability](./src/img/pmf.png)
-
 ## 1.2 Numerical Random Variables
-We'll now concentrate solely on the heights of students, setting aside all other characteristics. Student height is a continuous numerical random variable, ranging within a specific interval, such as between 0 cm and 280 cm.
+We'll now concentrate solely on the heights of users, setting aside all other characteristics. user height is a continuous numerical random variable, ranging within a specific interval, such as between 0 cm and 280 cm.
 
-**Probability density function PDF**
-This code  generates a Gaussian Probability Density Function (PDF) with a mean (\( \mu \)) of 170 cm and a standard deviation (\( \sigma \)) of 10 cm. The x-axis represents height in cm, and the y-axis represents the probability density. The curve shows how heights are distributed around the mean, indicating that heights close to 170 cm are more probable.
+- **Probability density function (PDF)**  is mathematically expressed as 
+\[
+p(x) = f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)
+\]
 
+Here, the distribution is completely determined by two parameters:
+- $( \mu $): The mean of the distribution; indicates where the peak of the distribution occurs.
+- $( \sigma^2 $): The variance of the distribution; indicates the spread or width of the distribution.
+
+In the given scenario, the PDF follows a Gaussian distribution with a mean (\( \mu \)) of 170 cm and a standard deviation (\( \sigma \)) of 10 cm. The x-axis denotes height in centimeters, and the y-axis signifies the density of probabilities. The graph reveals that heights clustered around 170 cm are most probable.
+
+The plot essentially tells us that in the population represented by this Gaussian model, the most common height is 170 cm, with most people's heights falling within the range of 160 cm to 180 cm.
+
+![pdf](./src/img/pdf.png)
+
+
+[Download here](./src/chapter1/pdf.ipynb)
 
 ```python
 import matplotlib.pyplot as plt
@@ -133,15 +139,10 @@ plt.legend()
 # Show the plot
 plt.show()
 ```
-![pdf](./src/img/pdf.png)
 
-  \[
-  f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)
-  \]
+This plot shows that the shape of the  distribution changes depending on the values on mean and standard deviation. With mean 0 and standard deviation 2, you can see the classic "bell curve" shape.
 
-
-***Gaussian distribution***
- This plot shows 100 samples from a Gaussian distribution. The shape of the  distribution changes depending on the values on mean and standard deviation. With mean 0 and standard deviation 2, you can see the classic "bell curve" shape.
+![Gaussian](./src/img/gaussian.JPG)
 
 ```python
 # Generate 100 samples from a Gaussian (Normal) distribution with mean 0 and standard deviation 2
@@ -159,59 +160,104 @@ plt.ylabel('Frequency')  # Updated this line
 # Show plots
 plt.show()
 ```
-![Gaussian](./src/img/gaussian.JPG)
 
-***Uniform Distribution***: The plot shows 100 samples from a uniform distribution between 0 and 2. The frequency of each bin should be roughly equal, given that the distribution is uniform.
+***Uniform Distribution***: 
+The histogram below represents the distribution of heights sampled from a Uniform distribution with a lower bound of 160 cm and an upper bound of 180 cm. Here are the key points:
+
+- ***Lower and Upper Bounds***: The red dashed line indicates the lower bound of 160 cm, and the green dashed line shows the upper bound of 180 cm. These lines mark the range within which all sampled heights fall.
+
+- ***Probability Density***: The y-axis represents the probability density. In line with the Uniform distribution's characteristics, you can observe that the density is roughly constant within the range [160, 180 cm], indicating that any height within this range is equally likely.
+
+- ***Labels and Title***: The x-axis is labeled 'Height (cm)', the y-axis is labeled 'Probability Density', and the plot is titled 'Histogram of Heights from Uniform Distribution'.
+
+![Uniform](./src/img/uniform.png)
+
+[Download here](./src/chapter1/uniform-distribution.ipynb)
 
 ```python
-X_uniform = np.random.uniform(0, 2, (100, 1))
 
-# Plot Uniform distribution
-plt.hist(X_uniform, bins=20, color='green', edgecolor='black', alpha=0.7)
-plt.title('Uniform Distribution')
-plt.xlabel('x')
-plt.ylabel('Frequency')
+# Generate random samples from a uniform distribution
+n_samples = 1000  # Number of samples
+a = 160  # Lower bound in cm
+b = 180  # Upper bound in cm
+samples_uniform = np.random.uniform(a, b, n_samples)
 
-# Show plots
+# Create histogram
+plt.figure(figsize=(12, 6))
+plt.hist(samples_uniform, bins=20, color='blue', edgecolor='black', alpha=0.7, density=True, label='Histogram')
+
+# Add lines to indicate lower and upper bounds
+plt.axvline(a, color='r', linestyle='--', linewidth=1, label=f'Lower Bound: {a}')
+plt.axvline(b, color='g', linestyle='--', linewidth=1, label=f'Upper Bound: {b}')
+
+# Labels and title
+plt.title('Histogram of Heights from Uniform Distribution')
+plt.xlabel('Height (cm)')
+plt.ylabel('Probability Density')
+plt.legend()
+
+# Show the plot
 plt.show()
+
 ```
-![Uniform](./src/img/uniform.JPG)
+
+The histogram effectively visualizes the uniformity of the height distribution within the specified bounds[160,180].
+
 
 ***Student's t-Distribution***
+The histogram below represents the distribution of values sampled from a Student's t-distribution with 5 degrees of freedom. Here are the key points:
+- ***Degrees of Freedom***: The distribution is characterized by 5 degrees of freedom, which influences the shape and spread of the distribution. Lower degrees of freedom result in heavier tails.
+- ***Mean***: The red dashed line indicates the empirical mean of the samples, which is close to 0. This is consistent with the theoretical mean of a Student's t-distribution with more than 1 degree of freedom, which is also 0.
+- ***Standard Deviation***: The green dashed lines mark one standard deviation away from the mean. The Student's t-distribution has fatter tails compared to a normal distribution, making it more prone to outliers (extreme values).
+- ***Probability Density***: The y-axis represents the probability density. Unlike a uniform distribution, the density here varies across different values. It is highest near the mean and decreases as we move away, but not as rapidly as in a normal distribution due to the heavier tails.
 
-This plot shows 100 samples from a Student's t-distribution with 1.5 degrees of freedom, a location of 0, and a scale of 2. The distribution is somewhat similar to the Gaussian distribution but has heavier tails.
+![Student](./src/img/t-student.png)
+
+[Download here](./src/chapter1/t-student.ipynb)
 
 ```python
-df = 1.5  # degrees of freedom
-loc = 0  # location
-scale = 2  # scale
+# Re-import required libraries due to execution state reset
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.stats import t
 
-X_t = t.rvs(df, loc, scale, size=(100, 1))
+# Parameters for the Student's t-distribution
+df = 5  # Degrees of freedom
+n_samples = 1000  # Number of samples
 
-# Plot Student's t-distribution
-plt.hist(X_t, bins=20, color='red', edgecolor='black', alpha=0.7)
-plt.title("Student's t-Distribution")
-plt.xlabel('x')
-plt.ylabel('Frequency')
+# Generate random samples from a Student's t-distribution
+samples_t = t.rvs(df, size=n_samples)
 
-# Show plots
+# Create histogram
+plt.figure(figsize=(12, 6))
+plt.hist(samples_t, bins=20, color='purple', edgecolor='black', alpha=0.7, density=True, label='Histogram')
+
+# Add lines to indicate the mean and standard deviation
+plt.axvline(samples_t.mean(), color='r', linestyle='--', linewidth=1, label=f'Mean: {samples_t.mean():.2f}')
+plt.axvline(samples_t.mean() - samples_t.std(), color='g', linestyle='--', linewidth=1, label=f'1 Std Dev: {samples_t.mean() - samples_t.std():.2f}')
+plt.axvline(samples_t.mean() + samples_t.std(), color='g', linestyle='--', linewidth=1, label=f'1 Std Dev: {samples_t.mean() + samples_t.std():.2f}')
+
+# Labels and title
+plt.title('Histogram of Values from Student\'s t-Distribution')
+plt.xlabel('Value')
+plt.ylabel('Probability Density')
+plt.legend()
+
+# Show the plot
 plt.show()
 ```
-![Student](./src/img/t-student.JPG)
 
-## 2. Mean and Variance
+
+The histogram effectively visualizes the characteristics of the Student's t-distribution, showing a mean close to zero and heavier tails, which makes it useful for dealing with small student sample sizes or unknown variance.​
+
+## 1.3 Mean and Variance
 The pdf of a continuous random variable describes its probability distribution fully. However, sometimes it's more convenient to summarize the distribution using a few key statistics:
 
 ![Pdf](./src/img/mean.JPG)
 
-##### Mean
-The mean $( \mu $) is the weighted average value of the random variable, where the weights are given by the probability density function (pdf). 
-
-##### Variance
-The Variance $( \sigma^2 $) quantifies the “dispersion” of the values around the mean.
-
-##### Standard Deviation
-The standard deviation $( \sigma $) is just its square root and is in the same scale as the random variables values.
+***Mean $( \mu $):*** is the weighted average value of the random variable. 
+***Variance $( \sigma^2 $):*** quantifies the “dispersion” of the values around the mean.
+***Standard Deviation $( \sigma $):*** is just its square root and is in the same scale as the random variables values.
 
 These summary statistics can be computed exactly using integrals.
 
@@ -225,17 +271,15 @@ Often, the probability density function $( p(x) $) may not be available or the i
 
 Assuming a set of samples $( x_i $), where $( i = 1, 2, \ldots, N $) are available, we can approximate the mean $( \mu $) and the variance $( \sigma^2 $) as follows:
 
-###### Approximating the Mean
 
-The mean $( \mu $) can be approximated as the average of the samples:
+- The mean $( \mu $) can be approximated as the average of the samples:
 
 $[
 \mu \approx \frac{1}{N} \sum_{i=1}^{N} x_i
 $]
 
-###### Approximating the Variance
 
-The variance $( \sigma^2 $) can be approximated as:
+- The variance $( \sigma^2 $) can be approximated as:
 
 $[
 \sigma^2 \approx \frac{1}{N} \sum_{i=1}^{N} (x_i - \mu)^2
@@ -243,7 +287,7 @@ $]
 
 Here, $( \mu $) is the approximated mean as calculated above.
 
-#### 3. Sample mean and covariance
+##### Sample mean and covariance
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -274,31 +318,15 @@ print(f"Standard deviation: {sigma}")
 ```
 ![sample_variables](./src/img/sample_variables.JPG)
 
-## 4. The Gaussian Distribution
 
-The Gaussian distribution, also known as the normal distribution, has many favorable properties that make it a popular choice for data modeling in various fields including statistics, finance, and machine learning.
 
-#### Analytical Form of the PDF
-
-The Probability Density Function (PDF) of the Gaussian distribution is given by the following formula:
-
-$[
-p(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2}
-$]
-
-Here, the distribution is completely determined by two parameters:
-- $( \mu $): The mean of the distribution
-- $( \sigma^2 $): The variance of the distribution
-
-The mean $( \mu $) indicates where the peak of the distribution occurs, and the variance $( \sigma^2 $) indicates the spread or width of the distribution.
-
-## 5. Multivariate Random Variables
+## 2. Multivariate Random Variables
 
 Often, we encounter situations where multiple random variables are associated with the same object. In such cases, it becomes convenient to consider these variables together as a single set. This set is referred to as a **random vector** or **multivariate random variable**, depending on the context.
 
 
-Examples could include:
-
+Examples of multivariate random variables could include:
+- The relationship between the student height and age.
 - The dimensions of an object, represented as (length, width, depth).
 - The pixels of an image, represented as (pixel1, pixel2, ..., pixelN).
 - The color channels of a pixel, represented as (R, G, B).
@@ -309,8 +337,6 @@ We can denote the individual variables as $( x_i $), where $( i = 1, 2, ..., D $
 
 Therefore, the probability of all these variables, $( p(x_1, x_2, ..., x_D) $), can be noted more compactly as $( p(\mathbf{X}) $).
 
-
-The next section will discuss what happens to the mean and variance when dealing with multivariate random variables.
 
 #### Mean of a Multivariate Variable
 
@@ -333,14 +359,14 @@ Recall that variance measures the "dispersion" of values around the mean for a u
 
 For a multivariate variable with $( D $) individual variables, the covariance is represented as a $( D \times D $) matrix.
 
-$[
+\[
 \text{Cov}(\mathbf{X}) = \begin{pmatrix}
 \text{cov}(x_1, x_1) & \text{cov}(x_1, x_2) & \cdots & \text{cov}(x_1, x_D) \\
 \text{cov}(x_2, x_1) & \text{cov}(x_2, x_2) & \cdots & \text{cov}(x_2, x_D) \\
 \vdots & \vdots & \ddots & \vdots \\
 \text{cov}(x_D, x_1) & \text{cov}(x_D, x_2) & \cdots & \text{cov}(x_D, x_D)
 \end{pmatrix}
-$]
+\]
 
 Each entry $( \text{cov}(x_i, x_j) $) measures how much $( x_i $) and $( x_j $) co-vary around their means.
 
@@ -387,16 +413,25 @@ As you can observe, the covariance matrix is always symmetric. That is:
 \text{cov}(x_i, x_j) = \text{cov}(x_j, x_i)
 \]
 
-Example
+***Example of a multivariate:***
+This plot can help in understanding the distribution of height and age among students, which is useful for decisions related to facility standardization in educational institutions.​ It represent students height and age data. Red and green points indicate original and sample means, respectively. Blue points show individual samples. The axes and annotations clarify distribution and correlations.
+
+![sample_variables](./src/img/2D_random_variables.png)
+
+[Download here](./src/chapter1/2D_random_variables.ipynb)
+
 ```python
+# Re-import required libraries due to execution state reset
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Define mean and covariance matrix
-mu = np.array([-2, 5])
-sigma = np.array([[4, -3], [-3, 8]])
+# Define mean and covariance matrix for height and age
+# Assuming mean height is 170 cm and mean age is 20 years
+# Covariance matrix is defined to assume some correlation between height and age
+mu = np.array([170, 20])
+sigma = np.array([[25, 5], [5, 4]])
 
-# Generate 20 2-D random samples
+# Generate 20 2-D random samples for height and age
 X = np.random.multivariate_normal(mu, sigma, 20)
 
 # Scatter plot for the samples
@@ -407,24 +442,24 @@ mu_s = np.mean(X, axis=0)
 sigma_s = np.cov(X, rowvar=False)
 
 # Add markers for mu and mu_s
-plt.scatter(mu[0], mu[1], color='red', zorder=5, label='$\\mu$ (Original Mean)')
-plt.scatter(mu_s[0], mu_s[1], color='green', zorder=5, label='$\\mu_s$ (Sample Mean)')
+plt.scatter(mu[0], mu[1], color='red', zorder=5, label='Original Mean (Height, Age)')
+plt.scatter(mu_s[0], mu_s[1], color='green', zorder=5, label='Sample Mean (Height, Age)')
 
 # Annotate the points for better visibility
-plt.annotate(f"mu ({mu[0]:.2f}, {mu[1]:.2f})", (mu[0], mu[1]), textcoords="offset points", xytext=(0,10), ha='center')
-plt.annotate(f"mu_s ({mu_s[0]:.2f}, {mu_s[1]:.2f})", (mu_s[0], mu_s[1]), textcoords="offset points", xytext=(0,10), ha='center')
+plt.annotate(f"Original Mean ({mu[0]:.2f} cm, {mu[1]:.2f} years)", (mu[0], mu[1]), textcoords="offset points", xytext=(0,10), ha='center')
+plt.annotate(f"Sample Mean ({mu_s[0]:.2f} cm, {mu_s[1]:.2f} years)", (mu_s[0], mu_s[1]), textcoords="offset points", xytext=(0,10), ha='center')
 
 # Labels and title
-plt.xlabel('X1')
-plt.ylabel('X2')
-plt.title('2-D Random Samples with Original and Sample Mean')
+plt.xlabel('Height (cm)')
+plt.ylabel('Age (years)')
+plt.title('Random Samples of Student Height and Age with Mean Values')
 plt.legend()
 plt.grid(True)
 
 # Show the plot
 plt.show()
 ```
-![sample_variables](./src/img/2D_random_variables.JPG)
+
 
 ## 7. The Multivariate Gaussian Distribution
 
