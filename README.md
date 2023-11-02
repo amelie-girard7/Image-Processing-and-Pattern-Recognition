@@ -1,4 +1,5 @@
-# Image processing and pattern recognition 
+# Probability and Statistics Fundamentals
+
 This repository is my notes on key concepts in probability and statistics, based on Prof. Massimo Piccardi's course Image Processing and Pattern Recognition 31256/42177. These principles are foundational for statistical pattern recognition and machine learning.
 
 # Agenda
@@ -1431,8 +1432,7 @@ Deep learning refers to the utilisation of neural networks that have multiple la
 ## Typical layer
 A typical layer of a neural network is identical to a logistic regression classifier!:
 
-![tlayer](./src/img/t-layer.png)
-
+![tlayer](./src/img/tlayer.png)
 from Jed Fox, Neural Networks 101
 
 The input features are weighted by corresponding coefficients and summed together, along with an added offset known as the bias term. This summed value is then passed through a nonlinear activation function, such as sigmoid (for binary classification), softmax, tanh, or ReLU.
