@@ -92,9 +92,9 @@ plt.show()
 We'll now concentrate solely on the heights of users, setting aside all other characteristics. user height is a continuous numerical random variable, ranging within a specific interval, such as between 0 cm and 280 cm.
 
 - **Probability density function (PDF)**  is mathematically expressed as 
-$$
+$
 p(x) = f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)
-$$
+$
 
 Here, the distribution is completely determined by two parameters:
 - $( \mu $): The mean of the distribution; indicates where the peak of the distribution occurs.
