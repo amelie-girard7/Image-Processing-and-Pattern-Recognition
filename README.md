@@ -92,9 +92,9 @@ plt.show()
 We'll now concentrate solely on the heights of users, setting aside all other characteristics. user height is a continuous numerical random variable, ranging within a specific interval, such as between 0 cm and 280 cm.
 
 - **Probability density function (PDF)**  is mathematically expressed as 
-$
+\[
 p(x) = f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)
-$
+\]
 
 Here, the distribution is completely determined by two parameters:
 - $( \mu $): The mean of the distribution; indicates where the peak of the distribution occurs.
@@ -256,17 +256,11 @@ The pdf of a continuous random variable describes its probability distribution f
 
 ![Pdf](./src/img/mean.JPG)
 
-<<<<<<< HEAD
 Mean $( \mu $): is the weighted average value of the random variable.
 
 Variance $( \sigma^2 $): quantifies the “dispersion” of the values around the mean.
 
 Standard Deviation $( \sigma $):is just its square root and is in the same scale as the random variables values.
-=======
-Mean $( \mu $): is the weighted average value of the random variable. 
-Variance $( \sigma^2 $): quantifies the “dispersion” of the values around the mean.
-Standard Deviation $( \sigma $): is just its square root and is in the same scale as the random variables values.
->>>>>>> 3db8c8c756863ba7989db3d094317cfdc6f33455
 
 These summary statistics can be computed exactly using integrals.
 
