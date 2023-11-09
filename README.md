@@ -58,6 +58,7 @@ for the example of users countries listed above:
 - \(0.18 + 0.25 + 0.38 + 0.10 + 0.09 = 1\)
 
  the bar chart serves as a visual representation of the PMF for a given dataset of countries. Each bar represents a country, and its height indicates the probability of that country appearing in a random sample. The probabilities sum up to 1, as they represent a complete sample space.
+
  ![probability](./src/img/pmf.png)
 
 [Download here](./src/chapter1/probability_mass_function_country.ipynb)
@@ -92,9 +93,8 @@ plt.show()
 We'll now concentrate solely on the heights of users, setting aside all other characteristics. user height is a continuous numerical random variable, ranging within a specific interval, such as between 0 cm and 280 cm.
 
 - **Probability density function (PDF)**  is mathematically expressed as 
-\[
-p(x) = f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)
-\]
+
+![probability](./src/img/math/pdf.JPG)
 
 Here, the distribution is completely determined by two parameters:
 - $( \mu $): The mean of the distribution; indicates where the peak of the distribution occurs.
@@ -362,14 +362,14 @@ Recall that variance measures the "dispersion" of values around the mean for a u
 
 For a multivariate variable with $( D $) individual variables, the covariance is represented as a $( D \times D $) matrix.
 
-\[
+$$
 \text{Cov}(\mathbf{X}) = \begin{pmatrix}
 \text{cov}(x_1, x_1) & \text{cov}(x_1, x_2) & \cdots & \text{cov}(x_1, x_D) \\
 \text{cov}(x_2, x_1) & \text{cov}(x_2, x_2) & \cdots & \text{cov}(x_2, x_D) \\
 \vdots & \vdots & \ddots & \vdots \\
 \text{cov}(x_D, x_1) & \text{cov}(x_D, x_2) & \cdots & \text{cov}(x_D, x_D)
 \end{pmatrix}
-\]
+$$
 
 Each entry $( \text{cov}(x_i, x_j) $) measures how much $( x_i $) and $( x_j $) co-vary around their means.
 
@@ -554,8 +554,8 @@ plt.show()
 Similarly to other distributions, it is possible to generate samples (sampling) also from a multivariate Gaussian distribution. 
 
 For instance, a scatter plot of 10,000 2D Gaussian samples can be generated with:
-- \( \mu = [0,0] \)
-- \( \Sigma = \left[ \begin{array}{cc} 0.61 & 0.48 \\ 0.48 & 0.64 \end{array} \right] \)
+ $$ \mu = [0,0] $$
+ $$ \Sigma = \left[ \begin{array}{cc} 0.61 & 0.48 \\ 0.48 & 0.64 \end{array} \right] $$
 
 A Python script can be used to generate these samples and visualize them on a scatter plot.
 
@@ -596,9 +596,9 @@ We need an optimality criterion. The likelihood function is given by:
 
 The likelihood function for $( N $) independent samples $( x_1, x_2, \ldots, x_N $) is given by:
 
-\[
+$$
 \mathcal{L}(\theta) = p(x_1|\theta) \cdot p(x_2|\theta) \cdot \ldots \cdot p(x_N|\theta) = \prod_{i=1}^{N} p(x_i|\theta)
-\]
+$$
 
 #### Maximum Likelihood Estimation (MLE)
 
@@ -615,8 +615,8 @@ The training set consists of 50 points generated from a Gaussian distribution wi
 
 ##### MLE Parameters
 The Maximum Likelihood Estimation (MLE) parameters for the Gaussian distribution are:
-- **Mean** ($( \mu $)): 0.14
-- **Standard Deviation** ($( \sigma $)): 1.13
+- **Mean** $( \mu $): 0.14
+- **Standard Deviation** $( \sigma $): 1.13
 
 #### Visualization
 The histogram shows the distribution of the training data points, and the curve represents the Gaussian distribution with the MLE parameters.
