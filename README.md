@@ -256,9 +256,11 @@ The pdf of a continuous random variable describes its probability distribution f
 
 ![Pdf](./src/img/mean.JPG)
 
-***Mean $( \mu $):*** is the weighted average value of the random variable. 
-***Variance $( \sigma^2 $):*** quantifies the “dispersion” of the values around the mean.
-***Standard Deviation $( \sigma $):*** is just its square root and is in the same scale as the random variables values.
+Mean $( \mu $): is the weighted average value of the random variable.
+
+Variance $( \sigma^2 $): quantifies the “dispersion” of the values around the mean.
+
+Standard Deviation $( \sigma $):is just its square root and is in the same scale as the random variables values.
 
 These summary statistics can be computed exactly using integrals.
 
@@ -275,16 +277,16 @@ Assuming a set of samples $( x_i $), where $( i = 1, 2, \ldots, N $) are availab
 
 - The mean $( \mu $) can be approximated as the average of the samples:
 
-$[
+$$
 \mu \approx \frac{1}{N} \sum_{i=1}^{N} x_i
-$]
+$$
 
 
 - The variance $( \sigma^2 $) can be approximated as:
 
-$[
+$$
 \sigma^2 \approx \frac{1}{N} \sum_{i=1}^{N} (x_i - \mu)^2
-$]
+$$
 
 Here, $( \mu $) is the approximated mean as calculated above.
 
@@ -346,9 +348,9 @@ The mean of a multivariate variable is an extension of the concept of the mean o
 
 Given $( D $) individual variables, the mean of each individual variable is calculated. These means are then "packed together" into a $( D \times 1 $) vector.
 
-$[
+$$
 \mu = [\mu_1, \mu_2, ..., \mu_D]^T
-$]
+$$
 
 In this notation, $( \mu $) is the vector that contains the means of each individual variable $( x_i $) for $( i = 1, 2, ..., D $).
 
@@ -377,16 +379,16 @@ For multivariate variables with $(D$) dimensions and $(N$) samples, both the sam
 
 The sample mean is a <span style="color:red">$(D \times 1$)</span> vector given by:
 
-\[
+$$
 \mu = \frac{1}{N} \sum_{i=1}^{N} \mathbf{x}_i
-\]
+$$
 
 
 The sample covariance is a <span style="color:red">$(D \times D$)</span> matrix, and it's defined as:
 
-\[
+$$
 \Sigma = \frac{1}{N} \sum_{i=1}^{N} (\mathbf{x}_i - \mu)(\mathbf{x}_i - \mu)^T
-\]
+$$
 
 Note that the covariance matrix is <span style="color:red">$(D \times D$)</span> in size, arising from the product of a <span style="color:red">$(D \times 1$)</span> vector and its transpose, a $(1 \times D$) vector.
 
@@ -397,7 +399,7 @@ To understand sample covariance more deeply, it's useful to look at its expanded
 
 The expanded formula for the sample covariance matrix $( \Sigma $) is:
 
-\[
+$$
 \begin{aligned}
 \Sigma &=  \left[ 
     \begin{array}{c}
@@ -406,13 +408,13 @@ The expanded formula for the sample covariance matrix $( \Sigma $) is:
     \end{array}
 \right]
 \end{aligned}
-\]
+$$
 
 As you can observe, the covariance matrix is always symmetric. That is:
 
-\[
+$$
 \text{cov}(x_i, x_j) = \text{cov}(x_j, x_i)
-\]
+$$
 
 ***Example of a multivariate:***
 This plot can help in understanding the distribution of height and age among students, which is useful for decisions related to facility standardization in educational institutions.​ It represent students height and age data. Red and green points indicate original and sample means, respectively. Blue points show individual samples. The axes and annotations clarify distribution and correlations.
@@ -666,9 +668,9 @@ If the likelihood function reaches zero, we can't distinguish between the best $
 ##### Solution: Log-Likelihood
 To overcome this issue, we compute the likelihood in logarithmic scale. The formula for the log-likelihood is:
 
-$[
+$$
 \log \mathcal{L}(\theta) = \sum_{i=1}^{N} \log p(x_i | \theta)
-$]
+$$
 
 **Advantages:**  
 If a factor was, say, 0.001, and the log is in base 10, it becomes a -3 addendum in the sum. This way, we are less likely to go out of the numerical range.
@@ -683,9 +685,9 @@ Both the likelihood and the log-likelihood are maximized by the same $( \theta $
 
 Let's say we have observed $( N $) samples in total, $( n_1 $) of the first value, $( n_2 $) of the second, etc. Then the probabilities can be calculated as:
 
-$[
+$$
 p_1 = \frac{n_1}{N}, \quad p_2 = \frac{n_2}{N}, \quad \ldots, \quad p_L = \frac{n_L}{N}
-$]
+$$
 
 **Example:**  
 Given 7 cars, 3 motorbikes, and 10 bicycles in total:
@@ -741,9 +743,9 @@ A higher score indicates greater "compatibility" between the measurement \( \mat
 
 **Probabilistic classifiers**
 In a probabilistic classifier, the scores, also known as probability of class y given input x \( p(y|\mathbf{x}) \). The scores satisfy:
-\[
+$$
 \sum_{y \in \mathcal{Y}} p(y|\mathbf{x}) = 1, \quad 0 \leq p(y|\mathbf{x}) \leq 1
-\]
+$$
 
 ![CP](./src/img/classifier-probabilistic.JPG)
 
@@ -759,9 +761,9 @@ The feature vector \( \mathbf{x} \) can be derived from various characteristics 
 
 Regardless of the source, \( \mathbf{x} \) can be conceptualised as a **large numerical vector**:
 
-\[
+$$
 \mathbf{x} = [ 2.2, 0.5, -1.7, \ldots, 321.4, 0.0, 9.6 ]^T
-\]
+$$
 
 ## The linear model
 We proceed to explicitly define the conditional probability \( p(y|\mathbf{x}) \). We commence with the most elementary model, which is the linear model.
@@ -769,17 +771,17 @@ In a linear model, each class is identified by a **vector of weights**, \( \math
 An additional number, \( b \), known as the bias or offset, may also be incorporated.
 
 The vectors and bias are as follows:
-\[
+$$
  \mathbf{w} = \begin{pmatrix} 2 \\ -1.2 \\ 0.6 \end{pmatrix}   \mathbf{x} =\begin{pmatrix} 2.4 \\ 3.5 \\ 1 \end{pmatrix}  b = -12.3
-\]
+$$
 
 #### The score of the linear model
 
 The ***score*** in the linear model is computed by taking the standard dot product of the weight vector \( \mathbf{w} \) and the measurement \( \mathbf{x} \), and then adding the bias term \( b \):
 
-\[
+$$
 \text{score} = \mathbf{w}^T \mathbf{x} + b
-\]
+$$
 
 \( \mathbf{w} \): parameters for the class
 \( \mathbf{x} \): measurement (input). 
@@ -847,15 +849,15 @@ The exponential function has the advantage of taking inputs from the entire real
 
 For each class \( k \), we first apply the exponential function to the linear model score \( w_k^T x + b_k \):
 
-\[
+$$
 \text{exp\_score} = e^{(w_k^T x + b_k)}
-\]
+$$
 
 Then, to normalize these exponential scores into probabilities, we sum up the exponential scores for all \( M \) classes and divide each class's exponential score by this sum:
 
-\[
+$$
 \text{normalized\_score}_k = \frac{e^{(w_k^T x + b_k)}}{\sum_{m=1}^{M} e^{(w_m^T x + b_m)}}
-\]
+$$
 
 This way, each \( \text{normalized\_score}_k \) will be a probability bounded between 0 and 1.
 
@@ -868,19 +870,19 @@ The (multinomial) logistic regression classifier has this expression:
 **The key properties**
 
 1. The score is non-negative: 
-\[
+$$
 \text{normalized\_score}_k \geq 0 \quad (\text{since } e^x \geq 0)
-\]
+$$
 
 2. The score is bounded by 1:
-\[
+$$
 0 \leq \text{normalized\_score}_k \leq 1 \quad (\text{as numerator is part of denominator } )
-\]
+$$
 
 3. The sum of the scores for all \( M \) classes is 1:
-\[
+$$
 \sum_{k=1}^{M} \text{normalized\_score}_k = 1
-\]
+$$
 
 These properties confirm that the normalized scores function as probabilities.
 
@@ -952,9 +954,9 @@ The ultimate objective is to train the classifier so that it can classify all in
 
 For both theoretical and pratical considerations, it's more appropriate to optimise the **log** of the probabilities rather than the probabilities themselves. The loss function that we aim to minimize is given by:
 
-\[
+$$
 \text{Loss} = -\sum_{i=1}^{N} \ln p(y_i|x_i)
-\]
+$$
 
 This is the Negative Log-Likelihood (NLL), also known as Cross Entropy (at times, XENT). The range of this function is from 0 (best) to \( +\infty \) (worst).
 
@@ -1023,15 +1025,15 @@ The table and these equations together provide a comprehensive view of how well 
 
 The fundamental measure of the performance of a classifier is the accuracy, often expressed as a percentage (e.g., 80%)
 
-\[
+$$
 \text{Accuracy} = \frac{{TP + TN}}{{P + N}}
-\]
+$$
 
 The error rate (e.g., 20%), which is the complement to accuracy, can be calculated as:
 
-\[
+$$
 \text{Error Rate} = 1 - \text{Accuracy} = \frac{{FP + FN}}{{P + N}}
-\]
+$$
 
 **Accuracy: shortcomings**
 
@@ -1065,41 +1067,41 @@ Dr. Lilly, a neuroscientist focused on Alzheimer's research, conducts a prelimin
 
 She finds that the drug effectively reversed Alzheimer's symptoms in 90 out of 100 samples. Using the formula:
 
-\[
+$$
 \text{Accuracy} = \frac{TP + TN}{P + N} = \frac{90}{100} = 90\%
-\]
+$$
 
 Lilly is encouraged but mindful that Alzheimer's is a complex disease requiring further investigation.
 
 She calculates the error rate:
 
-\[
+$$
 \text{Error Rate} = 1 - \text{Accuracy} = \frac{10}{100} = 10\%
-\]
+$$
 
 Next, she assesses the False Alarm Rate (FAR):
 
-\[
+$$
 \text{FAR} = \frac{FP}{TN + FP} = \frac{8}{88} \approx 9\%
-\]
+$$
 
 Her main concern is the Detection Rate (DR):
 
-\[
+$$
 \text{DR} = \frac{TP}{TP + FN} = \frac{10}{12} \approx 83\%
-\]
+$$
 
 She then calculates the drug's precision \( p \):
 
-\[
+$$
 p = \frac{TP}{TP + FP} = \frac{10}{18} \approx 56\%
-\]
+$$
 
 Finally, she evaluates the F1 score:
 
-\[
+$$
 \text{F1 score} = 2 \times \frac{p \times DR}{p + DR} \approx 67\%
-\]
+$$
 
 **Note**: The F1 score is notably different from the initial 90% accuracy, underscoring the need for a multi-faceted evaluation.
 
@@ -1121,9 +1123,9 @@ Frequently, a classifier's performance can be adjusted to improve the Detection 
 
 To further refine her understanding of the Alzheimer's drug, Lilly examines the Receiver Operating Characteristic (ROC) curve. This curve plots the False Alarm Rate (FAR) against the Detection Rate (DR), expressed as:
 
-\[
+$$
 \text{FAR} = \frac{FP}{TN + FP} \quad \text{and} \quad \text{DR} = \frac{TP}{TP + FN}
-\]
+$$
 
 ![ROC](./src/img/roc.JPG)
 
@@ -1131,9 +1133,9 @@ To further refine her understanding of the Alzheimer's drug, Lilly examines the 
 
 To summarize the ROC curve into a single performance metric, Lilly calculates the Area Under the ROC Curve (AUC-ROC):
 
-\[
+$$
 \text{AUC-ROC} = \int_{0}^{1} \text{ROC curve}
-\]
+$$
 
 The closer this number is to 1, the more promising the drug appears to be.
 Not stopping at the ROC curve, Lilly also evaluates the Precision-Recall (P-R) curve. This curve is defined by:
@@ -1145,9 +1147,9 @@ A comparable curve can be constructed using precision and recall values. The are
 The precision and recall are used to evaluate the performance of classification models. Precision focuses on the positive predictions made by the model, whereas Recall (or Sensitivity or True Positive Rate) focuses on the proportion of actual positive cases that were correctly identified.
 
 
-\[
+$$
 \text{Precision} = \frac{TP}{TP + FP} \quad \text{and} \quad \text{Recall} = \frac{TP}{TP + FN}
-\]
+$$
 
 ![AUC](./src/img/auc.JPG)
 
@@ -1155,9 +1157,9 @@ The precision and recall are used to evaluate the performance of classification 
 
 Finally, Lilly considers the Area Under the Precision-Recall Curve (AUPRC), calculated as:
 
-\[
+$$
 \text{AUPRC} = \int_{0}^{1} \text{P-R curve}
-\]
+$$
 
 Similar to AUC-ROC, a higher AUPRC value is indicative of better drug performance.
 
@@ -1165,7 +1167,7 @@ Similar to AUC-ROC, a higher AUPRC value is indicative of better drug performanc
 
 In multi-class classification scenarios, the confusion matrix becomes the go-to tool for performance evaluation. Consider a case with four distinct classes:
 
-\[
+$$
 \begin{array}{|c|c|c|c|c|}
 \hline
   & C1 & C2 & C3 & C4 \\
@@ -1179,21 +1181,21 @@ C3 & 0 & 0 & 34 & 6 \\
 C4 & 0 & 0 & 0 & 35 \\
 \hline
 \end{array}
-\]
+$$
 
 Metrics like accuracy and error rate can be naturally extended to this context. For more specific metrics, calculations can be focused on a per-class basis.
 
 For example, the accuracy can be computed as:
 
-\[
+$$
 \text{Accuracy} = \frac{TP_1 + TP_2 + TP_3 + TP_4}{\text{Total Samples}}
-\]
+$$
 
 And for Class 1, Precision can be calculated as:
 
-\[
+$$
 \text{Precision (Class 1)} = \frac{TP_1}{TP_1 + FP_{21} + FP_{31} + FP_{41}}
-\]
+$$
 
 ## Training vs test sets
 
@@ -1453,15 +1455,15 @@ The loss function, denoted as \( \Delta(y_i, y) \), measures the discrepancy bet
 
 The gradient of the loss function \( \Delta(y_i, y(W_{N})) \) with respect to the weights \( W_N \) in the output layer \( N \) can be written using the chain rule as:
 
-\[
+$$
 \frac{{\partial \Delta(y_i, y(W_{N}))}}{{\partial W_N}} = \frac{{\partial \Delta(y_i, y)}}{{\partial y}} \times \frac{{\partial y}}{{\partial W_N}}
-\]
+$$
 
 And for the weights \( W_{N-1} \) in layer \( N-1 \):
 
-\[
+$$
 \frac{{\partial \Delta(y_i, y(h(W_{N-1})))}}{{\partial W_N-1}} = \frac{{\partial \Delta(y_i, y)}}{{\partial y}}  \times \frac{{\partial y}}{{\partial h}} \times \frac{{\partial h}}{{\partial W_N-1}}
-\]
+$$
 
 These gradients are used to update \( W_N \) and \( W_{N-1} \) during the backpropagation process to minimize \( \Delta(y_i, y) \).
 
@@ -1470,9 +1472,9 @@ The loss function \( \Delta(y_i, y) \) is often multi-dimensional and depends on
 
 The update equation can be more precisely written as:
 
-\[
+$$
 w_{n+1} = w_n - \eta \frac{\partial \Delta(w_n)}{\partial w_n}
-\]
+$$
 
 
 ![first-order](./src/img/first-order.png)
