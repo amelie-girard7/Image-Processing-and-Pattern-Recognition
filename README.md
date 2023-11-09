@@ -256,9 +256,9 @@ The pdf of a continuous random variable describes its probability distribution f
 
 ![Pdf](./src/img/mean.JPG)
 
-***Mean $( \mu $):*** is the weighted average value of the random variable. 
-***Variance $( \sigma^2 $):*** quantifies the “dispersion” of the values around the mean.
-***Standard Deviation $( \sigma $):*** is just its square root and is in the same scale as the random variables values.
+Mean $( \mu $): is the weighted average value of the random variable. 
+Variance $( \sigma^2 $): quantifies the “dispersion” of the values around the mean.
+Standard Deviation $( \sigma $): is just its square root and is in the same scale as the random variables values.
 
 These summary statistics can be computed exactly using integrals.
 
