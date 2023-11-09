@@ -275,9 +275,9 @@ Assuming a set of samples $( x_i $), where $( i = 1, 2, \ldots, N $) are availab
 
 - The mean $( \mu $) can be approximated as the average of the samples:
 
-$$
+$
 \mu \approx \frac{1}{N} \sum_{i=1}^{N} x_i
-$$
+$
 
 
 - The variance $( \sigma^2 $) can be approximated as:
