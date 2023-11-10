@@ -511,8 +511,8 @@ plt.show()
 The Gaussian PDF in $( D $) dimensions is controlled by two parameters, $( \mu $) and $( \Sigma $).
 
 For example, when $( D=2 $):
-- \( \mu = [0, 0]^T \)
-- \( \Sigma = \left[ \begin{array}{cc} 0.25 & 0.3 \\ 0.3 & 1 \end{array} \right] \)
+
+<img src="./src/img/math/mu-2d.JPG" width="100" height="100">
 
 To visualize this, a 3D plot can be created where the axes represent $( X_1 $), $( X_2 $), and $( f(X) $).
 
@@ -554,8 +554,8 @@ plt.show()
 Similarly to other distributions, it is possible to generate samples (sampling) also from a multivariate Gaussian distribution. 
 
 For instance, a scatter plot of 10,000 2D Gaussian samples can be generated with:
- $$ \mu = [0,0] $$
- $$ \Sigma = \left[ \begin{array}{cc} 0.61 & 0.48 \\ 0.48 & 0.64 \end{array} \right] $$
+
+<img src="./src/img/math/multivariate.png" width="100" height="100">
 
 A Python script can be used to generate these samples and visualize them on a scatter plot.
 
@@ -1591,7 +1591,7 @@ A better alternative:
 ## The LSTM
 
 ![lstm](./src/img/lstm.png)
-from wikipedia
+from Wikipedia
 
 ## The Transformer's encoder
 BERT is shaped over the Transformer's encoder and is the current workhorse of sequential classification tasks
@@ -1605,7 +1605,7 @@ Then, you can use networks like the U-Net:
 
 ## CLIP, Stable Diffusion and the future
 Other networks integrating text and images have surged to fame:
-- CLIP uses pairs of images and their captions to classify new images in any class of choice, without re-training
+- CLIP uses pairs of images and their captions to classify new images in any class of choice without re-training
 - Stable Diffusion takes in input textual descriptions of scenes and generates stunning images
 
 This is likely to advance  in the near future
@@ -1615,4 +1615,3 @@ courtesy of Guodong (Troy) Zhao
 ## Resources
 - Towards Data Science (TDS) offers spectacular, world-famous blogs
 - Papers with Code collects all the state-of-the-art results, papers and their code (have a look at their home page)
-
