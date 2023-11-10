@@ -731,15 +731,16 @@ Iterative algorithms are often the only viable approach for maximizing the likel
 Classification is performed by first acquiring a measurement of the object and then applying a classification algorithm. Assuming the existence of M distinct classes (categories). The act of categorising the object to a specific class is termed as classification.
 
 ![Classification](./src/img/classification.JPG)
+
 The class \( y \) can take <span style="color:red">catgorical</span> values e.g., \{ "cat", "dog", "bird", "stand", "run", "land", "water", "road" \}. In the context of image and video data, **the measurement** is typically represented as a <span style="color:red"> numerical vector</span>.
 
 
 **The score function**
-For a particular  measurement \( \mathbf{x} \), a classification algorithm calculates a score \( s \) for each possible class label \( y \). Consider a scenario with three classes:
+For a particular  measurement $( \mathbf{x} $), a classification algorithm calculates a score \( s \) for each possible class label \( y \). Consider a scenario with three classes:
 
 ![CS](./src/img/classifier-score.JPG)
 
-A higher score indicates greater "compatibility" between the measurement \( \mathbf{x} \) and the corresponding class \( y \). Subsequently, the measurement \( \mathbf{x} \) is allocated to the class with the highest score.
+A higher score indicates greater "compatibility" between the measurement $( \mathbf{x} $) and the corresponding class $( y $). Subsequently, the measurement $( \mathbf{x} $) is allocated to the class with the highest score.
 
 **Probabilistic classifiers**
 In a probabilistic classifier, the scores, also known as probability of class y given input x \( p(y|\mathbf{x}) \). The scores satisfy:
@@ -1591,7 +1592,7 @@ A better alternative:
 ## The LSTM
 
 ![lstm](./src/img/lstm.png)
-from Wikipedia
+from wikipedia
 
 ## The Transformer's encoder
 BERT is shaped over the Transformer's encoder and is the current workhorse of sequential classification tasks
@@ -1605,7 +1606,7 @@ Then, you can use networks like the U-Net:
 
 ## CLIP, Stable Diffusion and the future
 Other networks integrating text and images have surged to fame:
-- CLIP uses pairs of images and their captions to classify new images in any class of choice without re-training
+- CLIP uses pairs of images and their captions to classify new images in any class of choice, without re-training
 - Stable Diffusion takes in input textual descriptions of scenes and generates stunning images
 
 This is likely to advance  in the near future
@@ -1615,3 +1616,4 @@ courtesy of Guodong (Troy) Zhao
 ## Resources
 - Towards Data Science (TDS) offers spectacular, world-famous blogs
 - Papers with Code collects all the state-of-the-art results, papers and their code (have a look at their home page)
+
