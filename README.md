@@ -743,10 +743,8 @@ For a particular  measurement $( \mathbf{x} $), a classification algorithm calcu
 A higher score indicates greater "compatibility" between the measurement $( \mathbf{x} $) and the corresponding class $( y $). Subsequently, the measurement $( \mathbf{x} $) is allocated to the class with the highest score.
 
 **Probabilistic classifiers**
-In a probabilistic classifier, the scores, also known as probability of class y given input x \( p(y|\mathbf{x}) \). The scores satisfy:
-$$
-\sum_{y \in \mathcal{Y}} p(y|\mathbf{x}) = 1, \quad 0 \leq p(y|\mathbf{x}) \leq 1
-$$
+In a probabilistic classifier, the scores, also known as probability of class y given input x, $ p(y|\mathbf{x}) $. The scores satisfy:
+![math-proba](./src/img/math/proba.png)
 
 ![CP](./src/img/classifier-probabilistic.JPG)
 
